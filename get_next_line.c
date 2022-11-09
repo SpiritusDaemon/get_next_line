@@ -6,48 +6,40 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 16:07:55 by gmarques          #+#    #+#             */
-/*   Updated: 2022/11/08 22:28:29 by marvin           ###   ########.fr       */
+/*   Updated: 2022/11/09 22:05:08 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-void buffer_shorten(char *buffer)
-{
-	int len;
-	int i;
-
-	i = -1;
-	len = 0;
-	while(buffer[++len] && ++i) 
-		buffer[i] == buffer[len];
-	buffer[i] == '\0';
-}
 char *get_next_line(int fd)
 {
-	int i;
 	static char buffer[BUFFER_SIZE + 1];
-	char *line;
-	int count;
+	int line_length;
+	char *temp;
+	int i;
+	int j;
 
-	count = -1;
 	i = -1;
-
-	while (buffer[count] != '\n')
-	{
-		read(fd, buffer, BUFFER_SIZE);
-		while(buffer[++count])
-			;			
-		count = -1;
-	}
+	j = -1;
+	line_length = (line_len(fd, buffer, BUFFER_SIZE)) + 1;
 	
-	while (buffer && ++i)
-	{
-		line[i] == buffer[0];
-		buffer_shorten(buffer);
-	}
-	line[i] = '\0';
-	printf("%s\n", line);
+		temp = malloc(sizeof(char) * line_length);
+		while (1) 
+		{ 										
+			read(fd, buffer, BUFFER_SIZE);
+			while(buffer[i] && buffer[i] != '\n')
+				temp[++j] = buffer[++i];
+			if(buffer[i] == '\n')
+			{	
+				temp[j] = '\0';
+				break;
+			}
+			i = 0;
+		}	
+	printf("%i\n", line_length);
+	printf("%s\n", temp);
+	return (temp);
 }
 
 int main (void)
@@ -56,7 +48,6 @@ int main (void)
 	get_next_line(fd);
 }
 
-/* what he has already read, he won't read again, he'll continue to the next line but print the size of the buffer; */
 
 /* create a static string that stores the values already read from the function.
 
