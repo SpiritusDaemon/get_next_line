@@ -6,7 +6,7 @@
 /*   By: gmarques <gmarques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 16:08:51 by gmarques          #+#    #+#             */
-/*   Updated: 2022/11/12 17:38:43 by gmarques         ###   ########.fr       */
+/*   Updated: 2022/11/12 18:12:25 by gmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <fcntl.h>
 
 # ifndef BUFFER_SIZE
-#define BUFFER_SIZE 42
+#define BUFFER_SIZE 1
 #endif
 
 char	*get_next_line(int fd);

@@ -6,7 +6,7 @@
 /*   By: gmarques <gmarques@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 11:58:31 by gmarques          #+#    #+#             */
-/*   Updated: 2022/11/12 17:42:01 by gmarques         ###   ########.fr       */
+/*   Updated: 2022/11/12 19:08:43 by gmarques         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	len_line(char *str)
 	i = 0;
 	if (!str)
 		return (0);
-	while ((str && str[i]) && str[i] != '\n')
+	while (str[i] && str[i] != '\n')
 		i++;
 	if (str[i] == '\n')
 		i++;
@@ -31,7 +31,9 @@ int	is_it_line(char *line)
 	int	i;
 
 	i = 0;
-	while (line && line[i])
+	if (!line)
+		return (0);
+	while (line[i])
 	{
 		if (line[i] == '\n')
 			return (1);
@@ -52,11 +54,8 @@ void	clear_buffer(char *buffer)
 		buffer[i++] = buffer[j];
 		buffer[j++] = 0;
 	}
-	if (!buffer[j])
-	{
-		while (buffer[i])
-			buffer[i++] = 0;
-	}
+	while (buffer[i])
+		buffer[i++] = 0;
 }
 
 char	*create_line(char *buffer, char *line)
@@ -73,7 +72,7 @@ char	*create_line(char *buffer, char *line)
 		temp[j] = line[j];
 		j++;
 	}	
-	while (buffer && buffer[i])
+	while (buffer[i])
 	{
 		temp[j + i] = buffer[i];
 		if (buffer[i] == '\n' && ++i)
@@ -81,7 +80,6 @@ char	*create_line(char *buffer, char *line)
 		i++;
 	}
 	temp[j + i] = '\0';
-	if (line)
-		free (line);
+	free (line);
 	return (temp);
 }
